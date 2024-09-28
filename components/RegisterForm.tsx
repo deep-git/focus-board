@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react'
-import AuthButton from './AuthButton';
 import { registerWithCreds } from '@/actions/auth';
 import { Button } from './ui/button';
 

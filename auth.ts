@@ -28,30 +28,31 @@ export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
 
                 const username = credentials.username as string;
                 const email = credentials.email as string;
-                const hash = saltAndHashPassword(credentials.password);
+                const password = credentials.password as string; // Use directly
+                //const hash = saltAndHashPassword(password);
 
                 try {
-
-
-                    let user: any = await db.user.findUnique({
-                        where: {
-                            email,
-                        },
+                    const user: any = await db.user.findUnique({
+                        where: { email },
                     });
 
                     if (!user) {
-                        user = await db.user.create({
+                        const hash = await bcrypt.hash(password, 10);
+                        // Create user if not found
+                        const newUser = await db.user.create({
                             data: {
                                 name: username,
                                 email,
                                 password: hash,
                             },
                         });
-                    } else {
-                        const isMatch = bcrypt.compareSync(credentials.password as string, user.password);
-                        if (!isMatch) {
-                            throw new Error("Incorrect password.");
-                        }
+
+                        return newUser;
+                    }
+
+                    const isMatch = bcrypt.compare(password, user.password);
+                    if (!isMatch) {
+                        throw new Error("Incorrect password.");
                     }
 
                     return user;
@@ -71,4 +72,4 @@ export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
             },
         }),
     },
-})
+});

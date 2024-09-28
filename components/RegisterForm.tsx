@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import AuthButton from './AuthButton';
 import { registerWithCreds } from '@/actions/auth';
+import { Button } from './ui/button';
 
 const RegisterForm = () => {
 
@@ -10,22 +11,28 @@ const RegisterForm = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError(null);
 
         const formData = new FormData(e.currentTarget);
 
+        console.time("registerWithCreds"); // Start the timer
+
         try {
             const response = await registerWithCreds(formData);
-            // Optionally redirect or handle successful login here
 
-            if (response) {
+            console.timeEnd("registerWithCreds"); // End the timer and log the duration
+            console.log("RESPONSE: ", response);
+
+            if (response?.error) {
                 setError(response.error);
+            } else {
+                window.location.href = "/dashboard";
             }
 
         } catch (error) {
+            console.timeEnd("registerWithCreds"); // End the timer even if there's an error
             if (error instanceof Error) {
                 setError(error.message); // If it's an Error instance
-            } else if (typeof error === 'string') {
-                setError(error); // If it's a string
             } else {
                 setError('Register failed'); // Fallback for unexpected error types
             }
@@ -80,7 +87,7 @@ const RegisterForm = () => {
                 {error && <p className="text-red-500">{error}</p>}
 
                 <div className="mt-4">
-                    <AuthButton typeSubmit="register" />
+                    <Button>Sign up</Button>
                 </div>
             </form>
         </div>

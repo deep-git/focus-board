@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from 'react'
-import AuthButton from './AuthButton'
 import { loginWithCreds } from '@/actions/auth';
+import { Button } from './ui/button';
 
 const LoginForm = () => {
 
@@ -10,21 +10,28 @@ const LoginForm = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError(null);
 
         const formData = new FormData(e.currentTarget);
+
+        console.time("loginWithCreds"); // Start the timer
 
         try {
             const response = await loginWithCreds(formData);
 
-            if (response) {
+            console.timeEnd("loginWithCreds"); // End the timer and log the duration
+            console.log("RESPONSE: ", response);
+
+            if (response?.error) {
                 setError(response.error);
+            } else {
+                window.location.href = "/dashboard";
             }
             // Optionally redirect or handle successful login here
         } catch (error) {
+            console.timeEnd("loginWithCreds"); // End the timer even if there's an error
             if (error instanceof Error) {
                 setError(error.message); // If it's an Error instance
-            } else if (typeof error === 'string') {
-                setError(error); // If it's a string
             } else {
                 setError('Login failed'); // Fallback for unexpected error types
             }
@@ -65,7 +72,7 @@ const LoginForm = () => {
                 {error && <p className="text-red-500">{error}</p>}
 
                 <div className="mt-4">
-                    <AuthButton typeSubmit="login" />
+                    <Button>Log in</Button>
                 </div>
             </form>
         </div>

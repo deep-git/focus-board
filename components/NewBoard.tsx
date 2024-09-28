@@ -34,7 +34,7 @@ const NewBoard = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:3000/api/board", {
+            const response = await fetch("/api/board", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json", // Fix the header key

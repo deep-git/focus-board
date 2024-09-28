@@ -23,35 +23,42 @@ export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
             },
             authorize: async (credentials) => {
                 if (!credentials || !credentials.email || !credentials.password) {
-                    return null;
+                    throw new Error("Email and password are required.");
                 }
 
                 const username = credentials.username as string;
                 const email = credentials.email as string;
                 const hash = saltAndHashPassword(credentials.password);
 
-                let user: any = await db.user.findUnique({
-                    where: {
-                        email,
-                    },
-                });
+                try {
 
-                if (!user) {
-                    user = await db.user.create({
-                        data: {
-                            name: username,
+
+                    let user: any = await db.user.findUnique({
+                        where: {
                             email,
-                            password: hash,
                         },
                     });
-                } else {
-                    const isMatch = bcrypt.compareSync(credentials.password as string, user.password);
-                    if (!isMatch) {
-                        throw new Error("Incorrect password.");
-                    }
-                }
 
-                return user;
+                    if (!user) {
+                        user = await db.user.create({
+                            data: {
+                                name: username,
+                                email,
+                                password: hash,
+                            },
+                        });
+                    } else {
+                        const isMatch = bcrypt.compareSync(credentials.password as string, user.password);
+                        if (!isMatch) {
+                            throw new Error("Incorrect password.");
+                        }
+                    }
+
+                    return user;
+                } catch (error) {
+                    console.error("Authorization error:", error);
+                    throw new Error("Authorization failed.");
+                }
             }
         }),
     ],

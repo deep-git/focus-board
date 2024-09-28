@@ -14,7 +14,6 @@ import {
 import { CgDisplayGrid } from 'react-icons/cg';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import axios from "axios";
 import { useRouter } from 'next/navigation';
 
 const NewBoard = () => {

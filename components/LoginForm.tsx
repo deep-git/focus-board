@@ -20,8 +20,14 @@ const LoginForm = () => {
                 setError(response.error);
             }
             // Optionally redirect or handle successful login here
-        } catch (err: any) {
-            setError(err.message || 'Login failed');
+        } catch (error) {
+            if (error instanceof Error) {
+                setError(error.message); // If it's an Error instance
+            } else if (typeof error === 'string') {
+                setError(error); // If it's a string
+            } else {
+                setError('Login failed'); // Fallback for unexpected error types
+            }
         }
     };
 

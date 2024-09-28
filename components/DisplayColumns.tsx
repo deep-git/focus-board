@@ -51,7 +51,6 @@ interface DisplayColumnsProps {
 const DisplayColumns = ({ column, tasks, subtasks, columnNames }: DisplayColumnsProps) => {
     const [hoverShow, setHoverShow] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [active, setActive] = useState(false);
     const [columnName, setColumnName] = useState(column.name);
     const [colorValue, setColorValue] = useState(column.color);
     const [error, setError] = useState<string | undefined>();
@@ -130,9 +129,7 @@ const DisplayColumns = ({ column, tasks, subtasks, columnNames }: DisplayColumns
         <div
             onMouseEnter={() => setHoverShow(true)}
             onMouseLeave={() => setHoverShow(false)}
-            className={cn("flex w-[300px] flex-col gap-5 items-center", {
-                "bg-neutral-800/50": active,
-            })}
+            className={cn("flex w-[300px] flex-col gap-5 items-center")}
         >
             <div className="flex justify-between items-center w-full">
                 <div className="flex gap-3 items-center">

@@ -1,14 +1,9 @@
 import { auth } from '@/auth';
-import Logout from '@/components/Logout';
 import MobileSidebar from '@/components/MobileSidebar';
 import { db } from '@/db';
-import { ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { BiLeftArrow } from 'react-icons/bi';
 import { BsChevronDoubleLeft } from 'react-icons/bs';
-import { CgChevronDoubleLeft } from 'react-icons/cg';
 
 const Dashboard = async () => {
 

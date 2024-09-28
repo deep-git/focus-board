@@ -8,7 +8,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import { ChevronDown, Pencil, Trash } from 'lucide-react';
+import { Pencil, Trash } from 'lucide-react';
 import {
     Dialog,
     DialogClose,
@@ -19,7 +19,6 @@ import {
     DialogTitle,
     DialogTrigger
 } from './ui/dialog';
-import axios from 'axios';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import MobileSidebar from './MobileSidebar';
@@ -53,17 +52,18 @@ interface NavbarProps {
         updatedAt: Date;
         color: string;
         boardId: string;
-    }[]
+    }[],
+    sessionName: string | null | undefined;
+    sessionEmail: string | null | undefined;
+    sessionImage: string | null | undefined
 }
 
-const Navbar = ({ board, boards, columnNames, columns }: NavbarProps) => {
+const Navbar = ({ sessionName, sessionEmail, sessionImage, board, boards, columnNames }: NavbarProps) => {
     const router = useRouter();
     const [closeDialog, setCloseDialog] = useState(false);
     const [closePopover, setClosePopover] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editBoardTitle, setEditBoardTitle] = useState(board?.name);
-    const pathname = usePathname();
-    const boardId = pathname.split("/")[3];
 
     const handleDeleteBoard = async () => {
         // Early exit if no board ID is available
@@ -171,7 +171,7 @@ const Navbar = ({ board, boards, columnNames, columns }: NavbarProps) => {
                     </Dialog>
 
                 </div>
-                <MobileSidebar boards={boards || []} />
+                <MobileSidebar boards={boards || []} sessionName={sessionName} sessionEmail={sessionEmail} sessionImage={sessionImage} />
             </div>
 
             <div className="flex justify-center items-center gap-2 md:gap-5 w-max ml-auto">

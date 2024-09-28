@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Checkbox } from './ui/checkbox';
 import { cn } from '@/lib/utils';
-import { usePathname, useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
 import Spinner from './Spinner/Spinner';
 
@@ -28,8 +27,6 @@ interface ViewSubtaskProps {
 }
 
 const ViewSubtask = ({ task, subtask, handleUpdateSubtasks, handleRemoveSubtask }: ViewSubtaskProps) => {
-    const pathname = usePathname();
-    const router = useRouter();
     const [changeStatus, setChangeStatus] = useState(subtask.completed);
     const [isLoading, setIsLoading] = useState(false);
 

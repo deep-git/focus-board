@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from './ui/dialog';
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { useRouter } from 'next/navigation';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
@@ -52,7 +51,6 @@ const ListTask = ({ task, subtasks, columnNames, handleRefresh }: ListTaskProps)
     const [closeDialog, setCloseDialog] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | undefined>();
-    const router = useRouter();
     const endRef = useRef<HTMLDivElement | null>(null);
     const [addSubtaskMode, setAddSubtaskMode] = useState(false);
     const [editTitle, setEditTitle] = useState(task.name);
@@ -408,6 +406,8 @@ const ListTask = ({ task, subtasks, columnNames, handleRefresh }: ListTaskProps)
                             </SelectContent>
                         </Select>
                     </div>
+
+                    {error && <span className="text-sm text-red-600">{error}</span>}
 
                     <Button onClick={handleSaveTask} disabled={isLoading}>
                         {isLoading ? 'Saving...' : 'Save'}

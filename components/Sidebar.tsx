@@ -4,21 +4,6 @@ import HideSidebar from './HideSidebar';
 import { auth } from '@/auth';
 import { db } from '@/db';
 
-interface User {
-    id?: string; // Make id optional
-    name: string;
-    email: string;
-    image?: string;
-}
-
-interface Session {
-    user?: User; // User remains optional
-}
-
-interface SidebarProps {
-    session: Session | null; // Allow session to be null
-}
-
 const Sidebar = async () => {
 
     const session = await auth();

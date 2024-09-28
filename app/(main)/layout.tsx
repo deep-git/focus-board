@@ -1,7 +1,5 @@
 import Sidebar from '@/components/Sidebar';
 import React from 'react';
-import { auth } from '@/auth'; // Ensure this is the correct path
-import { redirect } from 'next/navigation';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
 

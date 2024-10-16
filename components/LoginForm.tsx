@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { loginWithCreds } from '@/actions/auth';
 import { Button } from './ui/button';
+import { Input } from './ui/input';
 
 const LoginForm = () => {
 
@@ -39,40 +40,39 @@ const LoginForm = () => {
     };
 
     return (
-        <div>
+        <div className="w-full">
             <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-200">
+                    <label className="block text-sm font-medium text-black">
                         Email
                     </label>
-                    <input
+                    <Input
                         type="email"
                         placeholder="Email"
                         name="email"
                         id="email"
-                        className="mt-1 w-full px-4 p-2 h-10 rounded-full border border-gray-700 bg-white"
-                        required
-                    />
+                        className="mt-1 w-full px-4 p-2 rounded-lg border text-black border-light-gray_text/70 ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-1 bg-background_accent"
+                        required />
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-200">
+                    <label className="block text-sm font-medium text-black">
                         Password
                     </label>
-                    <input
+                    <Input
                         type="password"
                         placeholder="Password"
                         name="password"
                         id="password"
-                        className="mt-1 w-full px-4 p-2 h-10 rounded-full border border-gray-700 bg-white"
+                        className="mt-1 w-full px-4 p-2 rounded-lg border text-black border-light-gray_text/70 ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-1 bg-background_accent"
                         required
                     />
                 </div>
 
                 {error && <p className="text-red-500">{error}</p>}
 
-                <div className="mt-4">
-                    <Button>Log in</Button>
+                <div className="mt-10 w-full">
+                    <Button className="w-full bg-purple-1 text-[16px] text-white hover:bg-purple-1/90">Log in</Button>
                 </div>
             </form>
         </div>

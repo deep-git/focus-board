@@ -87,7 +87,7 @@ const ViewSubtask = ({ task, subtask, handleUpdateSubtasks, handleRemoveSubtask 
             <Checkbox
                 checked={changeStatus}
                 onCheckedChange={handleUpdateComplete} // Call the function directly
-                className="bg-light-sidebar dark:bg-dark-sidebar"
+                className="bg-light-sidebar dark:bg-dark-sidebar checked:bg-purple-1"
                 disabled={isLoading} // Disable while loading
             />
             <span className={cn("", {

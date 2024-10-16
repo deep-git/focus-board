@@ -48,9 +48,6 @@ const NewBoard = () => {
                 throw new Error(errorMessage);
             }
 
-            const board = await response.json(); // Parse the response
-            console.log("Board created successfully:", board);
-
             setBoardName("");
             setIsDialogOpen(false);
             router.refresh(); // Optionally refetch the boards
@@ -91,7 +88,7 @@ const NewBoard = () => {
                             <Button variant="ghost">Close</Button>
                         </DialogClose>
                         <Button disabled={isLoading} onClick={handleCreateBoard}>
-                            {isLoading ? "Creating..." : "Created"}
+                            {isLoading ? "Creating..." : "Create"}
                         </Button>
                     </DialogFooter>
                 </DialogHeader>

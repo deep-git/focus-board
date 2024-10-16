@@ -125,10 +125,33 @@ const DisplayColumns = ({ column, tasks, subtasks, columnNames }: DisplayColumns
         }
     }
 
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+    }
+
+    const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+        const taskId = e.dataTransfer.getData("text/plain");
+        const newColumnId = column.id;
+
+        // Update the task's columnId in the database
+        await fetch(`/api/task/${taskId}/column`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ columnId: newColumnId }),
+        });
+
+        // Optionally, refresh data or trigger state update
+        router.refresh();
+    }
+
     return (
         <div
             onMouseEnter={() => setHoverShow(true)}
             onMouseLeave={() => setHoverShow(false)}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
             className={cn("flex w-[300px] flex-col gap-5 items-center")}
         >
             <div className="flex justify-between items-center w-full">

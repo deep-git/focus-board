@@ -249,11 +249,15 @@ const ListTask = ({ task, subtasks, columnNames, handleRefresh }: ListTaskProps)
         setEditDescription(task.description);
     }
 
+    const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+        e.dataTransfer.setData("text/plain", task.id);
+    }
+
     return (
         <div className="flex w-full justify-start">
             <Dialog open={closeDialog} onOpenChange={setCloseDialog}>
                 <DialogTrigger className="flex w-full justify-start">
-                    <div className="w-full px-3 py-4 bg-light-sidebar dark:bg-dark-sidebar shadow-md rounded-lg">
+                    <div className="w-full px-3 py-4 bg-light-sidebar dark:bg-dark-sidebar shadow-md rounded-lg active:cursor-grabbing" draggable onDragStart={handleDragStart}>
                         <h4 className="text-lg text-black dark:text-white font-semibold truncate">{task.name}</h4>
                         <span className="text-sm font-semibold text-dark-gray_text">
                             {viewSubtasks.filter(subtask => subtask.completed).length} of {viewSubtasks.length} subtasks
@@ -308,29 +312,29 @@ const ListTask = ({ task, subtasks, columnNames, handleRefresh }: ListTaskProps)
                                 <Input placeholder="ke coffee" value={editTitle} onChange={e => setEditTitle(e.target.value)} required />
                             </div>
                         )}
-                        <DialogDescription>
-                            <div className="flex gap-4  items-center">
-                                <h4 className="max-w-96 line-clamp-2">{task.description}</h4>
-                                {editDescriptionMode ? (
-                                    <div className="flex gap-3 justify-center items-center">
-                                        <X onClick={handleCancelDescription} className="text-red-600 w-5 h-5" />
 
-                                        {editDescription !== "" && editDescription !== task.description && (
-                                            <Check onClick={handleUpdateContent} className="text-green-600 w-5 h-5" />
-                                        )}
-                                    </div>
-                                ) : (
-                                    <Pencil onClick={() => {
-                                        setEditDescriptionMode(true);
-                                        setEditTitleMode(false);
-                                        setEditTitle(task.name);
-                                        setAddSubtaskMode(false);
-                                        setAddSubtask([]);
-                                    }} className="w-5 h-5 text-light-gray_text dark:text-dark-gray_text" />
-                                )}
+                        <div className="flex gap-4  items-center">
+                            <h4 className="max-w-96 line-clamp-2">{task.description}</h4>
+                            {editDescriptionMode ? (
+                                <div className="flex gap-3 justify-center items-center">
+                                    <X onClick={handleCancelDescription} className="text-red-600 w-5 h-5" />
 
-                            </div>
-                        </DialogDescription>
+                                    {editDescription !== "" && editDescription !== task.description && (
+                                        <Check onClick={handleUpdateContent} className="text-green-600 w-5 h-5" />
+                                    )}
+                                </div>
+                            ) : (
+                                <Pencil onClick={() => {
+                                    setEditDescriptionMode(true);
+                                    setEditTitleMode(false);
+                                    setEditTitle(task.name);
+                                    setAddSubtaskMode(false);
+                                    setAddSubtask([]);
+                                }} className="w-5 h-5 text-light-gray_text dark:text-dark-gray_text" />
+                            )}
+
+                        </div>
+
 
                         {editDescriptionMode && (
                             <div className="flex gap-3 px-4 justify-center items-center">

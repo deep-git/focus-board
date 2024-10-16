@@ -17,7 +17,7 @@ interface BoardListProps {
 
 const BoardList = ({ board }: BoardListProps) => {
     const pathname = usePathname();
-    const boardId = pathname.split("/")[2]; // Consider using a URL parameter extraction approach if available
+    const boardId = pathname.split("/")[2];
 
     return (
         <div className={cn("flex gap-3 py-3 items-center cursor-pointer px-4 lg:px-7 mr-9 rounded-br-[25px] rounded-tr-[25px] transition", {

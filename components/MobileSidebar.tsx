@@ -63,7 +63,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ sessionName, sessionEmail
                 </div>
 
                 <div className="flex flex-col justify-center items-center mt-auto px-4 h-max gap-5">
-                    <div className="flex justify-between items-center w-full bg-light-board_background dark:bg-dark-board_background px-5 py-4 rounded-lg">
+                    <div className="flex justify-between items-center w-full bg-light-board_background dark:bg-dark-board_background px-5 py-4 rounded-lg flex-wrap gap-2">
                         <div>
                             <Popover>
                                 <PopoverTrigger>

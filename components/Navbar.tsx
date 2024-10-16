@@ -191,10 +191,10 @@ const Navbar = ({ sessionName, sessionEmail, sessionImage, board, boards, column
                     <PopoverTrigger>
                         <BsThreeDotsVertical className="w-6 h-6 hover:text-purple-1 text-light-gray_text dark:text-white" />
                     </PopoverTrigger>
-                    <PopoverContent className="bg-light-board_background dark:bg-dark-board_background border-[1px] border-light-board_background dark:border-dark-board_background shadow-lg">
+                    <PopoverContent className="bg-light-board_background dark:bg-dark-board_background border-[1px] border-light-board_background dark:border-dark-board_background w-max shadow-lg">
                         <Dialog open={closePopover} onOpenChange={() => setClosePopover(prev => !prev)}>
                             <DialogTrigger className="w-full">
-                                <div className="flex gap-3 text-red-600 hover:bg-red-600/10 px-2 py-2 rounded-lg cursor-pointer w-full">
+                                <div className="flex gap-3 text-red-600 hover:bg-red-600/10 border-light-sidebar dark:border-dark-sidebar border-2 w-max py-2 px-4 rounded-lg cursor-pointer">
                                     <Trash />
                                     <span>Delete Board</span>
                                 </div>

@@ -36,6 +36,7 @@ const config: Config = {
 					text: "rgb(255,255,255)",
 					new_column: "rgb(35,35,47)"
 				},
+				background_accent: "rgb(247,247,247)",
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",

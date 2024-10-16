@@ -2,7 +2,6 @@ import { auth } from '@/auth';
 import LoginForm from '@/components/LoginForm';
 import LoginGithub from '@/components/LoginGithub';
 import { ChevronLeft } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react'
